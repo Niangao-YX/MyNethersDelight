@@ -1,15 +1,22 @@
 package com.soytutta.mynethersdelight.common.registry;
 
+import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.block.entity.MNDHangingSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.MNDSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import java.util.function.Supplier;
 
+@EventBusSubscriber(modid = MyNethersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class MNDBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, "mynethersdelight");
@@ -26,4 +33,14 @@ public class MNDBlockEntityTypes {
             BlockEntityType.Builder.of(MNDHangingSignBlockEntity::new,
                     MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get()).build((null))
     );
+
+    @SubscribeEvent
+    public static void addCabinetsBlockEntities(BlockEntityTypeAddBlocksEvent event) {
+        event.modify(ModBlockEntityTypes.CABINET.get(),
+                MNDBlocks.NETHER_BRICKS_CABINET.get(),
+                MNDBlocks.RED_NETHER_BRICKS_CABINET.get(),
+                MNDBlocks.BLACKSTONE_BRICKS_CABINET.get(),
+                MNDBlocks.POWDERY_CABINET.get()
+        );
+    }
 }
