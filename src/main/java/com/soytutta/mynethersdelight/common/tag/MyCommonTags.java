@@ -15,6 +15,8 @@ public class MyCommonTags {
     public static final TagKey<Item> FOODS_MAGMA_CUBE = commonItemTag("foods/magma_cube");
     public static final TagKey<Item> FOODS_BOILED_EGG = commonItemTag("foods/boiled_egg");
 
+    public static final TagKey<Item> FOODS_GIANT_TENTACLES = commonItemTag("foods/giant_tentacles");
+
     public static final TagKey<Item> FOODS_RAW_STRIDER = commonItemTag("foods/raw_strider");
 
     private static TagKey<Item> commonItemTag(String path) {

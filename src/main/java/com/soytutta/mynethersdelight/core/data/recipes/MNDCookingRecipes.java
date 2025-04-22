@@ -43,6 +43,23 @@ public class MNDCookingRecipes {
                 .unlockedByAnyIngredient(MNDItems.GHASTA.get(), MNDItems.BULLET_PEPPER.get(), Items.PORKCHOP)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(output, "mynethersdelight:cooking/spicy_noodle_soup");
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.TWISTED_GHASTA.get(), 1, 200, 1.0F)
+                .addIngredient(MNDItems.GHASTA.get())
+                .addIngredient(Ingredient.of(Items.WARPED_FUNGUS, Items.TWISTING_VINES),2)
+                .unlockedByAnyIngredient(MNDItems.GHASTA.get(), Items.WARPED_FUNGUS, Items.TWISTING_VINES)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(output, "mynethersdelight:cooking/twisted_ghasta");
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.FRIES_GHASTA.get(), 1, 100, 1.0F, Items.PAPER)
+                .addIngredient(MNDItems.GHASTA.get(),2)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(output, "mynethersdelight:cooking/fries_ghasta");
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.GIANT_TAKOYAKI.get(), 1, 200, 1.0F)
+                .addIngredient(MyCommonTags.FOODS_GIANT_TENTACLES)
+                .addIngredient(MyCommonTags.FOODS_GIANT_TENTACLES)
+                .addIngredient(CommonTags.FOODS_DOUGH)
+                .addIngredient(ModItems.ONION.get())
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(output, "mynethersdelight:cooking/giant_tentacles");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SPICY_HOGLIN_STEW.get(), 1, 200, 1.0F)
                 .addIngredient(Ingredient.of(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get(), MNDItems.ROASTED_SAUSAGE.get(), MNDItems.COOKED_LOIN.get()))
                 .addIngredient(Tags.Items.CROPS_POTATO)
@@ -53,8 +70,22 @@ public class MNDCookingRecipes {
                 .build(output, "mynethersdelight:cooking/spicy_hoglin_stew");
     }
     private static void cookMeals(RecipeOutput output) {
-        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.DEVILED_EGG.get(), 2, 400, 1.0F)
-                .addIngredient(MNDItems.BOILED_EGG.get())
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SCOTCH_EGGS.get(), 1, 200, 1.0F)
+                .addIngredient(Ingredient.of(MyCommonTags.FOODS_BOILED_EGG),2)
+                .addIngredient(Ingredient.of(ModItems.MINCED_BEEF.get(), MNDItems.HOGLIN_SAUSAGE.get()))
+                .addIngredient(Tags.Items.FOODS_BREAD)
+                .unlockedByAnyIngredient(Items.EGG)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(output, "mynethersdelight:cooking/scotch_eggs");
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.EGG_SOUP.get(), 1, 200, 1.0F)
+                .addIngredient(MyCommonTags.FOODS_BOILED_EGG)
+                .addIngredient(Ingredient.of(CommonTags.FOODS_COOKED_EGG),2)
+                .addIngredient(CommonTags.FOODS_ONION)
+                .unlockedByAnyIngredient(Items.EGG)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(output, "mynethersdelight:cooking/egg_soup");
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.DEVILED_EGG.get(), 2, 100, 1.0F)
+                .addIngredient(MyCommonTags.FOODS_BOILED_EGG)
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(Ingredient.of(MNDItems.HOGLIN_SAUSAGE.get(), ModItems.BACON.get()))
                 .unlockedByAnyIngredient(MNDItems.STRIDER_EGG.get(),MNDItems.BOILED_EGG.get())

@@ -40,6 +40,7 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerCommonTags() {
+        this.tag(MyCommonTags.FOODS_GIANT_TENTACLES).add(MNDItems.GHASTA.get());
         this.tag(MyCommonTags.FOODS_MAGMA_CUBE).add(MNDItems.MAGMA_CAKE.get(), MNDItems.MAGMA_CAKE_SLICE.get(), MNDItems.ROCK_SOUP.get(), MNDItems.BURNT_ROLL.get());
         this.tag(MyCommonTags.FOODS_RAW_STRIDER).add(MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get());
         this.tag(MyCommonTags.FOODS_RAW_HOGLIN).add(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
@@ -78,6 +79,8 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerMinecraftTags() {
+        this.tag(Tags.Items.FOODS_BREAD).add(MNDItems.SLICES_OF_BREAD.get(), MNDItems.TOASTS.get());
+
         this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get(), MNDItems.RESURGENT_SOIL_FARMLAND.get());
 
         this.tag(ItemTags.MEAT).addTag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.MINCED_STRIDER.get(), MNDItems.ROAST_EAR.get());

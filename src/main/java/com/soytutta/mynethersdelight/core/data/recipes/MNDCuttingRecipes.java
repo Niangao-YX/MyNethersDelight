@@ -85,11 +85,6 @@ public class MNDCuttingRecipes {
     }
 
     private static void cuttingVegetables(RecipeOutput output) {
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SUGAR_CANE),
-                        Ingredient.of(CommonTags.TOOLS_KNIFE),
-                        Items.SUGAR, 1)
-                .addResultWithChance(Items.SUGAR, 0.25F, 1)
-                .build(output, "farmersdelight:cutting/sugar_cane_alt");
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CARVED_PUMPKIN),
                         Ingredient.of(CommonTags.TOOLS_KNIFE),
                         ModItems.PUMPKIN_SLICE.get(), 1)
@@ -120,6 +115,14 @@ public class MNDCuttingRecipes {
                         Ingredient.of(CommonTags.TOOLS_KNIFE),
                         MNDItems.MAGMA_CAKE_SLICE.get(), 7)
                 .build(output, "mynethersdelight:cutting/magma_cake");
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.BREAD_LOAF_BLOCK.get()),
+                        Ingredient.of(CommonTags.TOOLS_KNIFE),
+                        MNDItems.SLICES_OF_BREAD.get(), 5)
+                .build(output, "mynethersdelight:cutting/slices_of_bread");
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.GHAST_SOURDOUGH.get()),
+                        Ingredient.of(CommonTags.TOOLS_KNIFE),
+                        MNDItems.GHAST_DOUGH.get(), 3)
+                .build(output, "mynethersdelight:cutting/ghast_dough");
     }
 
     private static void stripLogForBark(RecipeOutput output, ItemLike log, ItemLike strippedLog) {

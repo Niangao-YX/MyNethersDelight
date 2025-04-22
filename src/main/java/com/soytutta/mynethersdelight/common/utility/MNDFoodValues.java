@@ -12,13 +12,34 @@ public class MNDFoodValues
         public static final FoodProperties STRIDER_EGG = (new FoodProperties.Builder())
                 .nutrition(3).saturationModifier(0.3F)
                 .alwaysEdible().build();
+        public static final FoodProperties ENCHANTED_GOLDEN_EGG = (new FoodProperties.Builder())
+                .nutrition(4).saturationModifier(1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1200, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 1200, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 600, 3), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 2), 1.0F)
+                .alwaysEdible().fast().build();
+        public static final FoodProperties GOLDEN_EGG = (new FoodProperties.Builder())
+                .nutrition(4).saturationModifier(1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 600, 0), 1.0F)
+                .alwaysEdible().fast().build();
         public static final FoodProperties BOILED_EGG = (new FoodProperties.Builder())
                 .nutrition(4).saturationModifier(0.7F)
-                .fast().build();
+                .alwaysEdible().fast().build();
         public static final FoodProperties DEVILED_EGG = (new FoodProperties.Builder())
                 .nutrition(5).saturationModifier(0.7F)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 200, 0), 1.0F)
-                .fast().build();
+                .alwaysEdible().fast().build();
+        public static final FoodProperties SCOTCH_EGGS = (new FoodProperties.Builder())
+                .nutrition(12).saturationModifier(0.8F)
+                .effect(() ->  new MobEffectInstance(ModEffects.NOURISHMENT, 2400, 0, false, false), 1.0F)
+                .build();
+        public static final FoodProperties EGG_SOUP = (new FoodProperties.Builder())
+                .nutrition(10).saturationModifier(0.7F)
+                .effect(() ->  new MobEffectInstance(ModEffects.COMFORT, 1200, 0, false, false), 1.0F)
+                .build();
+
         public static final FoodProperties STRIDER_SLICE = (new FoodProperties.Builder())
                 .nutrition(4).saturationModifier(0.7f)
                 .effect(() -> new MobEffectInstance(MobEffects.POISON, 200, 0), 0.15F)
@@ -69,6 +90,19 @@ public class MNDFoodValues
         public static final FoodProperties HOTDOG = (new FoodProperties.Builder())
                 .nutrition(8).saturationModifier(0.45f)
                 .build();
+        public static final FoodProperties HOTDOG_WITH_MIXED_SALAD = (new FoodProperties.Builder())
+                .nutrition(10).saturationModifier(0.5f)
+                .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 0), 1.0F)
+                .build();
+        public static final FoodProperties HOTDOG_WITH_NETHER_SALAD = (new FoodProperties.Builder())
+                .nutrition(10).saturationModifier(0.5f)
+                .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 240, 0), 0.3F)
+                .build();
+        public static final FoodProperties CHILIDOG = (new FoodProperties.Builder())
+                .nutrition(11).saturationModifier(0.5f)
+                .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT, 600, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 0), 1.0F)
+                .build();
         public static final FoodProperties SAUSAGE_AND_POTATOES = (new FoodProperties.Builder())
                 .nutrition(11).saturationModifier(0.55f)
                 .build();
@@ -80,6 +114,9 @@ public class MNDFoodValues
         public static final FoodProperties COOKED_LOIN = (new FoodProperties.Builder())
                 .nutrition(7).saturationModifier(0.75f)
                 .build();
+        public static final FoodProperties NETHER_BURGER = (new FoodProperties.Builder())
+                .nutrition(12).saturationModifier(0.75f)
+                .build();
         public static final FoodProperties BLUE_TENDERLOIN_STEAK = (new FoodProperties.Builder())
                 .nutrition(9).saturationModifier(0.8f)
                 .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 300, 0), 1.0F)
@@ -87,6 +124,9 @@ public class MNDFoodValues
                 .build();
         public static final FoodProperties RED_LOIN_STICK = (new FoodProperties.Builder())
                 .nutrition(10).saturationModifier(0.7F)
+                .build();
+        public static final FoodProperties BACON_WRAPPED_SAUSAGE_STICK = (new FoodProperties.Builder())
+                .nutrition(10).saturationModifier(0.6F)
                 .build();
         public static final FoodProperties FRIED_HOGLIN_CHOP = (new FoodProperties.Builder())
                 .nutrition(12).saturationModifier(0.9f)
@@ -98,10 +138,31 @@ public class MNDFoodValues
                 .nutrition(3).saturationModifier(1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F)
                 .build();
+        public static final FoodProperties TWISTED_GHASTA = (new FoodProperties.Builder())
+                .nutrition(10).saturationModifier(0.65F)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 2400, 0, false, false), 1.0F)
+                .build();
+        public static final FoodProperties GIANT_TAKOYAKI = (new FoodProperties.Builder())
+                .nutrition(12).saturationModifier(0.75F)
+                .build();
+        public static final FoodProperties FRIES_GHASTA = (new FoodProperties.Builder())
+                .nutrition(8).saturationModifier(0.6F)
+                .alwaysEdible().fast().build();
         public static final FoodProperties GHAST_SALAD = (new FoodProperties.Builder())
                 .nutrition(8).saturationModifier(0.85F)
                 .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 300, 0), 1.0F)
                 .build();
+        public static final FoodProperties DRIED_GHAST_WITH_MILK = (new FoodProperties.Builder())
+                .nutrition(6).saturationModifier(0.45F)
+                .alwaysEdible().fast().build();
+        public static final FoodProperties SIZZLING_PUDDING = (new FoodProperties.Builder())
+                .nutrition(9).saturationModifier(0.65F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 100, 0), 1.0F)
+                .build();
+        public static final FoodProperties TEAR_POPSICLE = (new FoodProperties.Builder())
+                .nutrition(3).saturationModifier(0.2F)
+                .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 100, 1, false, false), 1.0F)
+                .alwaysEdible().fast().build();
         public static final FoodProperties SPICY_NOODLE_SOUP = (new FoodProperties.Builder())
                 .nutrition(16).saturationModifier(0.65F)
                 .effect(() ->  new MobEffectInstance(ModEffects.COMFORT, 6000, 0, false, false), 1.0F)
@@ -116,19 +177,24 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 600, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1200, 0, false, false), 1.0F)
                 .build();
+        public static final FoodProperties SLICES_OF_BREAD = (new FoodProperties.Builder())
+                .nutrition(5).saturationModifier(0.6F)
+                .build();
+        public static final FoodProperties TOASTS = (new FoodProperties.Builder())
+                .nutrition(7).saturationModifier(0.6F)
+                .build();
         // SPICY
         public static final FoodProperties BULLET_PEPPER = (new FoodProperties.Builder())
                 .nutrition(2).saturationModifier(0.5f)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 100, 2), 1.0F)
                 .alwaysEdible().build();
+        public static final FoodProperties STUFFED_PEPPER = (new FoodProperties.Builder())
+                .nutrition(8).saturationModifier(0.8f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 100, 2), 1.0F)
+                .alwaysEdible().build();
         public static final FoodProperties SPICY_SKEWER = (new FoodProperties.Builder())
                 .nutrition(7).saturationModifier(0.9f)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 1200, 0), 1.0F)
-                .build();
-        public static final FoodProperties CHILIDOG = (new FoodProperties.Builder())
-                .nutrition(13).saturationModifier(0.45f)
-                .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT, 600, 0), 1.0F)
-                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 0), 1.0F)
                 .build();
         public static final FoodProperties SPICY_HOGLIN_STEW = (new FoodProperties.Builder())
                 .nutrition(12).saturationModifier(0.8f)

@@ -68,12 +68,16 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.HOGLIN_SAUSAGE.get());
                     output.accept(MNDItems.ROASTED_SAUSAGE.get());
                     output.accept(MNDItems.HOTDOG.get());
+                    output.accept(MNDItems.HOTDOG_WITH_MIXED_SALAD.get());
+                    output.accept(MNDItems.HOTDOG_WITH_NETHER_SALAD.get());
                     output.accept(MNDItems.SAUSAGE_AND_POTATOES.get());
                     output.accept(MNDItems.BREAKFAST_SAMPLER.get());
                     output.accept(MNDItems.COOKED_LOIN.get());
+                    output.accept(MNDItems.NETHER_BURGER.get());
                     output.accept(MNDItems.BLUE_TENDERLOIN_STEAK.get());
-                    output.accept(MNDItems.RED_LOIN_STICK.get());
                     output.accept(MNDItems.FRIED_HOGLIN_CHOP.get());
+                    output.accept(MNDItems.RED_LOIN_STICK.get());
+                    output.accept(MNDItems.BACON_WRAPPED_SAUSAGE_STICK.get());
 
                     output.accept(MNDItems.RAW_STUFFED_HOGLIN.get());
                     output.accept(MNDItems.ROAST_STUFFED_HOGLIN.get());
@@ -84,8 +88,12 @@ public class MNDCreativeTab {
 
                     output.accept(MNDItems.STRIDER_ROCK.get());
                     output.accept(MNDItems.STRIDER_EGG.get());
+                    output.accept(MNDItems.GOLDEN_EGG.get());
+                    output.accept(MNDItems.ENCHANTED_GOLDEN_EGG.get());
                     output.accept(MNDItems.BOILED_EGG.get());
                     output.accept(MNDItems.DEVILED_EGG.get());
+                    output.accept(MNDItems.SCOTCH_EGGS.get());
+                    output.accept(MNDItems.EGG_SOUP.get());
                     output.accept(MNDItems.STRIDER_SLICE.get());
                     output.accept(MNDItems.MINCED_STRIDER.get());
                     output.accept(MNDItems.BLEEDING_TARTAR.get());
@@ -97,16 +105,27 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.STRIDERLOAF.get());
                     output.accept(MNDItems.COLD_STRIDERLOAF.get());
 
-                    output.accept(MNDItems.GHAST_DOUGH.get());
+                    output.accept(MNDItems.TEAR_POPSICLE.get());
                     output.accept(MNDItems.GHASTA.get());
+                    output.accept(MNDItems.TWISTED_GHASTA.get());
+                    output.accept(MNDItems.SPICY_NOODLE_SOUP.get());
+                    output.accept(MNDItems.FRIES_GHASTA.get());
+                    output.accept(MNDItems.SPICY_COTTON.get());
                     output.accept(MNDItems.GHASMATI.get());
                     output.accept(MNDItems.GHAST_SALAD.get());
-                    output.accept(MNDItems.SPICY_NOODLE_SOUP.get());
-                    output.accept(MNDItems.SPICY_COTTON.get());
+                    output.accept(MNDItems.DRIED_GHAST_WITH_MILK.get());
+                    output.accept(MNDItems.SIZZLING_PUDDING.get());
                     output.accept(MNDItems.GHASTA_WITH_CREAM_BLOCK.get());
                     output.accept(MNDItems.GHASTA_WITH_CREAM.get());
+                    output.accept(MNDItems.GIANT_TAKOYAKI.get());
+                    output.accept(MNDItems.GHAST_DOUGH.get());
+                    output.accept(MNDItems.GHAST_SOURDOUGH.get());
+                    output.accept(MNDItems.BREAD_LOAF_BLOCK.get());
+                    output.accept(MNDItems.SLICES_OF_BREAD.get());
+                    output.accept(MNDItems.TOASTS.get());
 
                     output.accept(MNDItems.BULLET_PEPPER.get());
+                    output.accept(MNDItems.STUFFED_PEPPER.get());
                     output.accept(MNDItems.SPICY_SKEWER.get());
                     output.accept(MNDItems.CHILIDOG.get());
                     output.accept(MNDItems.SPICY_HOGLIN_STEW.get());

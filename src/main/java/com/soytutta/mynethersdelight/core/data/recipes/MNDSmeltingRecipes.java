@@ -36,6 +36,17 @@ public class MNDSmeltingRecipes {
                         Items.BREAD, 0.35F, 100)
                 .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_DOUGH.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread") + "_from_smoking");
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MNDItems.GHAST_SOURDOUGH.get()), RecipeCategory.FOOD,
+                        MNDItems.BREAD_LOAF_BLOCK.get(), 0.35F, 400)
+                .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_SOURDOUGH.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread_loaf") + "_from_smelting");
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(MNDItems.GHAST_SOURDOUGH.get()), RecipeCategory.FOOD,
+                        MNDItems.BREAD_LOAF_BLOCK.get(), 0.35F, 200)
+                .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_SOURDOUGH.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread_loaf") + "_from_smoking");
+        foodSmeltingRecipes("toast", Ingredient.of(MNDItems.SLICES_OF_BREAD.get()), MNDItems.TOASTS.get(), 0.15F, output);
+
     }
 
     private static void foodSmeltingRecipes(String name, Ingredient ingredient, ItemLike result, float experience, RecipeOutput output) {

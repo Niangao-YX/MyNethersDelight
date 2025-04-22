@@ -207,6 +207,9 @@ public class MNDBlocks {
             new GhastaWithCreamBlock(Properties.ofFullCopy(Blocks.CAKE).lightLevel((light) ->  3)
                     , MNDItems.GHASTA_WITH_CREAM, true)
     );
+    public static final Supplier<Block> BREAD_LOAF_BLOCK = BLOCKS.register("bread_loaf_block", () ->
+            new BreadLoafBlock(Properties.ofFullCopy(Blocks.CAKE), MNDItems.SLICES_OF_BREAD)
+    );
     public static final Supplier<Block> MAGMA_CAKE_BLOCK = BLOCKS.register("magma_cake_block", () ->
             new MagmaCakeBlock (Block.Properties.ofFullCopy(Blocks.CAKE).lightLevel((light) ->  3)
                     , MNDItems.MAGMA_CAKE_SLICE)

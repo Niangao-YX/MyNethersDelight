@@ -3,8 +3,8 @@ package com.soytutta.mynethersdelight.common.loot;
 import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.soytutta.mynethersdelight.common.block.BreadLoafBlock;
 import com.soytutta.mynethersdelight.common.block.MagmaCakeBlock;
-import com.soytutta.mynethersdelight.common.block.StuffedHoglinBlock;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
@@ -43,6 +43,9 @@ public class MNDEspecialLootModifier extends LootModifier
                 int bites = state.getValue(MagmaCakeBlock.BITES);
                 int count = state.getValue(MagmaCakeBlock.SECOND_CAKE) ? 14 - bites : 7 - bites;
                 generatedLoot.add(new ItemStack(this.especialDrop, count));
+            } else if (targetBlock instanceof BreadLoafBlock) {
+                int bites = state.getValue(BreadLoafBlock.BITES);
+                generatedLoot.add(new ItemStack(this.especialDrop, 5 - bites));
             }
         }
         return generatedLoot;

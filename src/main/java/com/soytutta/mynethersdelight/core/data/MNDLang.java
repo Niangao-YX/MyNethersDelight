@@ -39,11 +39,7 @@ public class MNDLang extends LanguageProvider {
                 MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),
                 MNDBlocks.WALL_POWDERY_TORCH.get(),
                 MNDBlocks.POWDERY_WALL_SIGN.get(),
-                MNDBlocks.POWDERY_WALL_HANGING_SIGN.get(),
-                MNDBlocks.STRIDERLOAF_BLOCK.get(),
-                MNDBlocks.COLD_STRIDERLOAF_BLOCK.get(),
-                MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(),
-                MNDBlocks.MAGMA_CAKE_BLOCK.get()
+                MNDBlocks.POWDERY_WALL_HANGING_SIGN.get()
         ).contains(block.get()));
 
         blocks.forEach((b) -> {
@@ -51,6 +47,7 @@ public class MNDLang extends LanguageProvider {
             if (addedKeys.add(descriptionId)) {
                 String name = descriptionId.replaceFirst("block.mynethersdelight.", "");
                 name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll(" Block", "");
                 this.add(descriptionId, name);
             }
         });
@@ -76,10 +73,6 @@ public class MNDLang extends LanguageProvider {
         this.add("block.mynethersdelight.letios_compost", "Leteos Compost");
         this.add("block.mynethersdelight.powdery_block", "Block of Powdery Cannon");
         this.add("block.mynethersdelight.stripped_powdery_block", "Block of Stripped Powdery Cannon");
-        this.add("block.mynethersdelight.striderloaf_block", "Striderloaf");
-        this.add("block.mynethersdelight.cold_striderloaf_block", "Cold Striderloaf");
-        this.add("block.mynethersdelight.ghasta_with_cream_block", "Ghasta with Cream");
-        this.add("block.mynethersdelight.magma_cake_block", "Magma Cake");
 
         this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
         this.add("effect.mynethersdelight.g_pungent", "Pungent");
@@ -94,6 +87,8 @@ public class MNDLang extends LanguageProvider {
         this.add("mynethersdelight.block.feast.space_required", "You need more space to serve this.");
         this.add("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
         this.add("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
+        this.add("farmersdelight.tooltip.golden_egg", "Nourished by all harmful effects");
+        this.add("farmersdelight.tooltip.enchanted_golden_egg", "Nourished by all harmful effects");
         this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
         this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
         this.add("farmersdelight.tooltip.magma_cake_slice", "Spicy frog Snack");
