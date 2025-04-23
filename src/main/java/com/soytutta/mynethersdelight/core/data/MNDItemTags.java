@@ -53,10 +53,13 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MyCommonTags.FOODS_RAW_GHAST).add(MNDItems.GHASTA.get(), MNDItems.GHASMATI.get());
         this.tag(MyCommonTags.FOODS_RICE_PASTA).add(MNDItems.GHASTA.get());this.tag(CommonTags.FOODS_PASTA).add(MNDItems.GHASTA.get()); this.tag(CommonTags.CROPS_RICE).add(MNDItems.GHASMATI.get());
         this.tag(CommonTags.FOODS_DOUGH).add(MNDItems.GHAST_DOUGH.get());
-        this.tag(CommonTags.FOODS_COOKED_EGG).addTag(MyCommonTags.FOODS_BOILED_EGG);
+        this.tag(CommonTags.FOODS_COOKED_EGG).addTag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
     }
 
     private void registerNeoForgeTags() {
+        this.tag(Tags.Items.FOODS_GOLDEN).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
+        this.tag(Tags.Items.FOODS_SOUP).add(MNDItems.EGG_SOUP.get(), MNDItems.SPICY_NOODLE_SOUP.get(), MNDItems.ROCK_SOUP.get());
+        this.tag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED).add(MNDItems.BREAD_LOAF_BLOCK.get(), MNDItems.ROAST_STUFFED_HOGLIN.get(), MNDItems.STRIDERLOAF_BLOCK.get(), MNDItems.COLD_STRIDERLOAF_BLOCK.get(), MNDItems.GHASTA_WITH_CREAM_BLOCK.get(), MNDItems.MAGMA_CAKE.get());
         this.tag(Tags.Items.EGGS).add(MNDItems.STRIDER_EGG.get());
         this.tag(Tags.Items.FOODS_RAW_FISH).add(MNDItems.STRIDER_SLICE.get(), MNDItems.GHASTA.get());
         this.tag(Tags.Items.FOODS_RAW_MEAT).addTag(MyCommonTags.FOODS_RAW_HOGLIN).add(MNDItems.MINCED_STRIDER.get());
@@ -91,7 +94,8 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ItemTags.CAT_FOOD).addTag(MyCommonTags.FOODS_RAW_STRIDER).add(MNDItems.GHASMATI.get());
         this.tag(ItemTags.WOLF_FOOD).add(MNDItems.HOTDOG.get());
 
-         this.tag(ItemTags.PIGLIN_FOOD).addTag(MNDTags.STUFFED_HOGLIN_ITEMS).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
+        this.tag(ItemTags.PIGLIN_FOOD).addTag(MNDTags.STUFFED_HOGLIN_ITEMS).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
+        this.tag(ItemTags.PIGLIN_LOVED).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
 
         this.tag(ItemTags.PLANKS).add(MNDItems.POWDERY_PLANKS.get());
         this.tag(ItemTags.WOODEN_BUTTONS).add(MNDItems.POWDERY_BUTTON.get());
