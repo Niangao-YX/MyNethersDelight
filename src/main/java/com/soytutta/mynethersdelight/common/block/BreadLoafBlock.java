@@ -39,18 +39,18 @@ public class BreadLoafBlock extends Block
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 4);
 
-    protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 4.0D, 14.0D);
+    protected static final VoxelShape SHAPE_NS  = Block.box(3, 0, 1, 13, 10, 15);
+    protected static final VoxelShape SHAPE_WE = Block.box(1, 0, 3, 15, 10, 13);
+    public final Supplier<Item> breadSlice;
 
-    public final Supplier<Item> pieSlice;
-
-    public BreadLoafBlock(Properties properties, Supplier<Item> pieSlice) {
+    public BreadLoafBlock(Properties properties, Supplier<Item> breadSlice) {
         super(properties);
-        this.pieSlice = pieSlice;
+        this.breadSlice = breadSlice;
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(BITES, 0));
     }
 
-    public ItemStack getPieSliceItem() {
-        return new ItemStack(this.pieSlice.get());
+    public ItemStack getBreadSliceItem() {
+        return new ItemStack(this.breadSlice.get());
     }
 
     public int getMaxBites() {
@@ -59,7 +59,8 @@ public class BreadLoafBlock extends Block
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        Direction direction = state.getValue(FACING);
+        return (direction == Direction.NORTH || direction == Direction.SOUTH) ? SHAPE_NS : SHAPE_WE;
     }
 
     @Override
@@ -90,14 +91,11 @@ public class BreadLoafBlock extends Block
         return consumeBite(level, pos, state, player);
     }
 
-    /**
-     * Eats a slice from the pie, feeding the player.
-     */
     protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {
         if (!playerIn.canEat(false)) {
             return InteractionResult.PASS;
         } else {
-            ItemStack sliceStack = this.getPieSliceItem();
+            ItemStack sliceStack = this.getBreadSliceItem();
             FoodProperties sliceFood = sliceStack.getItem().getFoodProperties(sliceStack, playerIn);
 
             if (sliceFood != null) {
@@ -120,9 +118,6 @@ public class BreadLoafBlock extends Block
         }
     }
 
-    /**
-     * Cuts off a bite and drops a slice item, without feeding the player.
-     */
     protected ItemInteractionResult cutSlice(Level level, BlockPos pos, BlockState state, Player player) {
         int bites = state.getValue(BITES);
         if (bites < getMaxBites() - 1) {
@@ -132,7 +127,7 @@ public class BreadLoafBlock extends Block
         }
 
         Direction direction = player.getDirection().getOpposite();
-        ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
+        ItemUtils.spawnItemEntity(level, this.getBreadSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
                 direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
         level.playSound(null, pos, SoundEvents.WOOL_BREAK, SoundSource.PLAYERS, 0.8F, 0.8F);
         return ItemInteractionResult.SUCCESS;
