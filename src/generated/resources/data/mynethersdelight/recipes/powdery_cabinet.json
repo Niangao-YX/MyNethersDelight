@@ -3,16 +3,16 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "mynethersdelight:powdery_planks"
+      "item": "mynethersdelight:powdery_slab"
     },
     "X": {
-      "item": "mynethersdelight:powdery_slab"
+      "item": "mynethersdelight:powdery_trapdoor"
     }
   },
   "pattern": [
-    "#X#",
-    "# #",
-    "#X#"
+    "###",
+    "X X",
+    "###"
   ],
   "result": {
     "item": "mynethersdelight:powdery_cabinet"

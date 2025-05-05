@@ -87,12 +87,12 @@ public class MNDCraftingRecipes {
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "block_of_powdery_cannon"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_CABINET.get())
-                .pattern("#X#")
-                .pattern("# #")
-                .pattern("#X#")
-                .define('#', MNDItems.POWDERY_PLANKS.get()).define('X', MNDItems.POWDERY_PLANKS_SLAB.get())
-                .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
-                .save(consumer, new ResourceLocation("mynethersdelight", "block_of_powdery_cabinet"));
+                .pattern("###")
+                .pattern("X X")
+                .pattern("###")
+                .define('#', MNDItems.POWDERY_PLANKS_SLAB.get()).define('X', MNDItems.POWDERY_TRAPDOOR.get())
+                .unlockedBy("has_powdery_slab", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS_SLAB.get()))
+                .save(consumer, new ResourceLocation("mynethersdelight", "powdery_cabinet"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.POWDERY_PLANKS.get(),4)
                 .requires(MNDTags.BLOCK_OF_POWDERY)
                 .group("planks")
