@@ -189,7 +189,7 @@ public class MNDBlocks {
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> POWDERY_WALL_SIGN = BLOCKS.register("powdery_wall_sign", () ->
-            new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN),
+            new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN).dropsLike(POWDERY_SIGN.get()),
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> POWDERY_HANGING_SIGN = BLOCKS.register("powdery_hanging_sign", () ->
@@ -197,7 +197,7 @@ public class MNDBlocks {
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> POWDERY_WALL_HANGING_SIGN = BLOCKS.register("powdery_wall_hanging_sign", () ->
-            new MNDWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_HANGING_SIGN),
+            new MNDWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_HANGING_SIGN).dropsLike(POWDERY_HANGING_SIGN.get()),
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> STRIDERLOAF_BLOCK = BLOCKS.register("striderloaf_block", () ->
