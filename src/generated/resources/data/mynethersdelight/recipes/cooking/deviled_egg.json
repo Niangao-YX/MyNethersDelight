@@ -1,17 +1,22 @@
 {
   "type": "farmersdelight:cooking",
-  "cookingtime": 400,
+  "cookingtime": 100,
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "mynethersdelight:boiled_egg"
+      "tag": "forge:boiled_egg"
     },
     {
       "tag": "mynethersdelight:hot_spice"
     },
-    {
-      "tag": "forge:raw_bacon"
-    }
+    [
+      {
+        "item": "mynethersdelight:hoglin_sausage"
+      },
+      {
+        "item": "farmersdelight:bacon"
+      }
+    ]
   ],
   "recipe_book_tab": "meals",
   "result": {

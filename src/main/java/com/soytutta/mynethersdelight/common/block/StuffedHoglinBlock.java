@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -44,6 +45,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // thanks Umpaz for letting me use this code <3
 public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
@@ -130,6 +134,28 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         return level.getBlockState(pos.below()).isSolid();
     }
 
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder lootParams) {
+        List<ItemStack> drops = new ArrayList<>(super.getDrops(state, lootParams));
+        if (!lootParams.getLevel().isClientSide) {
+            BedPart part = state.getValue(PART);
+            int serving = state.getValue(SERVINGS);
+
+            int bonemealCount = 0;
+            if (part == BedPart.HEAD) {
+                bonemealCount = (serving == 7) ? 1 : (serving <= 6) ? 2 : 0;
+            } else if (part == BedPart.FOOT) {
+                bonemealCount = (serving == 5) ? 1 : (serving <= 4) ? 2 : 0;
+            }
+
+
+            if (bonemealCount > 0) {
+                drops.add(new ItemStack(Items.BONE_MEAL, bonemealCount));
+            }
+        }
+        return drops;
+    }
+
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide && player.isCreative()) {
             BedPart bedpart = state.getValue(PART);
@@ -149,12 +175,24 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
     }
 
     @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext p_49479_) {
-        Direction direction = p_49479_.getHorizontalDirection();
-        BlockPos blockpos = p_49479_.getClickedPos();
-        BlockPos blockpos1 = blockpos.relative(direction);
-        Level level = p_49479_.getLevel();
-        return level.getBlockState(blockpos1).canBeReplaced(p_49479_) && level.getWorldBorder().isWithinBounds(blockpos1) ? (BlockState)this.defaultBlockState().setValue(FACING, direction) : null;
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Direction direction = context.getHorizontalDirection();
+        BlockPos clickedPos = context.getClickedPos();
+        BlockPos adjacentPos = clickedPos.relative(direction);
+        Level level = context.getLevel();
+
+        if (level.getBlockState(adjacentPos).canBeReplaced(context) && level.getWorldBorder().isWithinBounds(adjacentPos)) {
+            if (canSurvive(level.getBlockState(adjacentPos), level, adjacentPos) &&
+                    canSurvive(this.defaultBlockState(), level, clickedPos)) {
+                return this.defaultBlockState().setValue(FACING, direction);
+            }
+        }
+        Player player = context.getPlayer();
+        if (player != null) {
+            player.displayClientMessage(MNDTextUtils.getTranslation("block.feast.space_required"), true);
+        }
+        return null;
     }
 
     @Override

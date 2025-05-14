@@ -10,7 +10,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class MNDTags {
+
     public static final TagKey<Item> BLOCK_OF_POWDERY = modItemTag("block_of_powdery");
+
+    public static final TagKey<Block> RESURGENT_SOIL_PLANT = modBlockTag("resurgent_soil_plant");
 
     public static final TagKey<Block> NOT_PROPAGATE_PLANT = modBlockTag("not_propagate_plant");
     public static final TagKey<Block> ABOVE_PROPAGATE_PLANT = modBlockTag("above_propagate_plant");
@@ -47,6 +50,7 @@ public class MNDTags {
     public static final TagKey<Item> POWDER_CANNON = modItemTag("powder_cannon");
     public static final TagKey<Block> POWDERY_CANNON_PLANTABLE_ON = modBlockTag("powdery_cannon_plantable_on");
     public static final TagKey<Block> POWDERY_CANE = modBlockTag("powdery_cane");
+
     public static final TagKey<EntityType<?>> SPECIAL_HUNT = modEntityTag("special_hunt");
 
     public MNDTags() {}

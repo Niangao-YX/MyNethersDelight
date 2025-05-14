@@ -15,6 +15,10 @@
 		{
 			"bowl": "mynethersdelight:rock_soup",
 			"cup": "miners_delight:rock_soup_cup"
+		},
+		{
+			"bowl": "mynethersdelight:egg_soup",
+			"cup": "miners_delight:egg_soup_cup"
 		}
 	]
 }

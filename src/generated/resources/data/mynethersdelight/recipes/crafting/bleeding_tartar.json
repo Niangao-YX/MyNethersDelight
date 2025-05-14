@@ -3,10 +3,10 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "mynethersdelight:minced_strider"
+      "item": "mynethersdelight:minced_strider"
     },
     {
-      "tag": "mynethersdelight:minced_strider"
+      "item": "mynethersdelight:minced_strider"
     },
     {
       "tag": "forge:eggs"

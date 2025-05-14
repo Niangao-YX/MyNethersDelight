@@ -4,7 +4,7 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "tag": "mynethersdelight:strider_slice"
+      "item": "mynethersdelight:strider_slice"
     },
     {
       "item": "minecraft:crimson_fungus"

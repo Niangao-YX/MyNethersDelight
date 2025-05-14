@@ -127,6 +127,14 @@ public class MNDCuttingRecipes {
                         Ingredient.of(ForgeTags.TOOLS_KNIVES),
                         MNDItems.MAGMA_CAKE_SLICE.get(), 7)
                 .build(consumer, "mynethersdelight:cutting/magma_cake");
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.BREAD_LOAF_BLOCK.get()),
+                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        MNDItems.SLICES_OF_BREAD.get(), 5)
+                .build(consumer, "mynethersdelight:cutting/slices_of_bread");
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.GHAST_SOURDOUGH.get()),
+                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        MNDItems.GHAST_DOUGH.get(), 3)
+                .build(consumer, "mynethersdelight:cutting/ghast_dough");
     }
 
     private static void stripLogForBark(Consumer<FinishedRecipe> consumer, ItemLike log, ItemLike strippedLog) {

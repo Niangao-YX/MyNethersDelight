@@ -4,7 +4,7 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "mynethersdelight:ghasta"
+      "tag": "forge:rice_pasta"
     },
     {
       "tag": "forge:cooked_eggs"
@@ -13,7 +13,7 @@
       "tag": "mynethersdelight:hot_spice"
     },
     {
-      "tag": "forge:raw_pork"
+      "tag": "forge:raw_hoglin"
     }
   ],
   "recipe_book_tab": "meals",

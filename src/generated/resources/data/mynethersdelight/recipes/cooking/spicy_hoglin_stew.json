@@ -3,17 +3,28 @@
   "cookingtime": 200,
   "experience": 1.0,
   "ingredients": [
+    [
+      {
+        "item": "mynethersdelight:hoglin_loin"
+      },
+      {
+        "item": "mynethersdelight:hoglin_sausage"
+      },
+      {
+        "item": "mynethersdelight:roasted_sausage"
+      },
+      {
+        "item": "mynethersdelight:cooked_loin"
+      }
+    ],
     {
-      "tag": "mynethersdelight:loin_hoglin"
+      "tag": "forge:crops/potato"
     },
     {
-      "item": "minecraft:potato"
+      "tag": "forge:crops/carrot"
     },
     {
-      "item": "minecraft:carrot"
-    },
-    {
-      "tag": "mynethersdelight:bullet_pepper"
+      "item": "mynethersdelight:bullet_pepper"
     }
   ],
   "recipe_book_tab": "meals",

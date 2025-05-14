@@ -9,9 +9,14 @@
     {
       "tag": "mynethersdelight:hot_spice"
     },
-    {
-      "tag": "mynethersdelight:chili_meats"
-    },
+    [
+      {
+        "item": "mynethersdelight:minced_strider"
+      },
+      {
+        "item": "farmersdelight:minced_beef"
+      }
+    ],
     {
       "item": "minecraft:nether_wart"
     }

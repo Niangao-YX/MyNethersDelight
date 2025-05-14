@@ -16,7 +16,7 @@
       "tag": "forge:eggs"
     },
     {
-      "tag": "mynethersdelight:bullet_pepper"
+      "item": "mynethersdelight:bullet_pepper"
     }
   ],
   "recipe_book_tab": "meals",

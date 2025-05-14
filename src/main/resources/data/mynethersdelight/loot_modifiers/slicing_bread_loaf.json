@@ -1,0 +1,16 @@
+{
+  "type": "mynethersdelight:pastry_slicing",
+  "conditions": [
+    {
+      "condition": "minecraft:match_tool",
+      "predicate": {
+        "tag": "farmersdelight:tools/knives"
+      }
+    },
+    {
+      "condition": "minecraft:block_state_property",
+      "block": "mynethersdelight:bread_loaf_block"
+    }
+  ],
+  "slice": "mynethersdelight:slices_of_bread"
+}

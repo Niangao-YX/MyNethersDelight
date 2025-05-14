@@ -7,13 +7,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ambient.Bat;
-import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.horse.Horse;
@@ -31,6 +31,7 @@ import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,8 @@ public class CommonEvent {
             if (directSource.getItemInHand(InteractionHand.MAIN_HAND).getEnchantmentLevel(MNDEnchantments.HUNTING.get()) > 0
                     && (mob.getMaxHealth() < 150.0F || mob.getType().is(MNDTags.SPECIAL_HUNT))
                     && (((directSource.hasEffect(MobEffects.LUCK) || directSource.hasEffect(MobEffects.UNLUCK)) && event.getEntity().level().random.nextFloat() < 0.6F)
-                    || (event.getEntity().level().random.nextFloat() < 0.4F))) {
+                    || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES)
+                    || event.getEntity().level().random.nextFloat() < 0.4F)) {
 
                 Difficulty difficulty = event.getEntity().level().getDifficulty();
                 float baseFailProbability = switch (difficulty) {
@@ -80,45 +82,33 @@ public class CommonEvent {
 
                 // FAILED HUNT
                 if ((event.getEntity().level().random.nextFloat() < FailProbability
-                        || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.2F))
+                        || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.2F)
+                        || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES))
                         && !mob.hasEffect(MobEffects.CONFUSION)) {
-                    mob.setInvisible(true);
 
                     if (mob instanceof Horse horse
                             && (event.getEntity().level().random.nextFloat() < (FailProbability / 2)
-                            || (horse.isTamed() && event.getEntity().level().random.nextFloat() < FailProbability))){
+                            || (horse.isTamed() && event.getEntity().level().random.nextFloat() < FailProbability)
+                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES) && event.getEntity().level().random.nextFloat() < FailProbability))) {
+
                         ZombieHorse zombieHorse = EntityType.ZOMBIE_HORSE.create(mob.level());
                         if (zombieHorse != null) {
-                            zombieHorse.setTamed(true);
-
-                            AttributeInstance horseMaxHealth = horse.getAttribute(Attributes.MAX_HEALTH);
-                            AttributeInstance zombieHorseMaxHealth = zombieHorse.getAttribute(Attributes.MAX_HEALTH);
-                            if (horseMaxHealth != null && zombieHorseMaxHealth != null) {
-                                zombieHorseMaxHealth.setBaseValue(horseMaxHealth.getBaseValue());
-                            }
-                            AttributeInstance horseMovementSpeed = horse.getAttribute(Attributes.MOVEMENT_SPEED);
-                            AttributeInstance zombieHorseMovementSpeed = zombieHorse.getAttribute(Attributes.MOVEMENT_SPEED);
-                            if (horseMovementSpeed != null && zombieHorseMovementSpeed != null) {
-                                zombieHorseMovementSpeed.setBaseValue(horseMovementSpeed.getBaseValue());
-                            }
-                            AttributeInstance horseJumpStrength = horse.getAttribute(Attributes.JUMP_STRENGTH);
-                            AttributeInstance zombieHorseJumpStrength = zombieHorse.getAttribute(Attributes.JUMP_STRENGTH);
-                            if (horseJumpStrength != null && zombieHorseJumpStrength != null) {
-                                zombieHorseJumpStrength.setBaseValue(horseJumpStrength.getBaseValue());
-                            }
-
+                            transferAttributes(horse, zombieHorse);
                             mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.ZOMBIE_VILLAGER_CONVERTED, SoundSource.PLAYERS, 1.0F, 1.0F);
                             zombieHorse.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
                             mob.level().addFreshEntity(zombieHorse);
+                            zombieHorse.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
 
-                            zombieHorse.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));                        }
-                        return;
+                            mob.setInvisible(true);
+                            return;
+                        }
                     }
 
                     mob.addTag("prevent_drops");
 
                     if (mob instanceof Spider
                             && event.getEntity().level().random.nextFloat() < FailProbability) {
+
                         CaveSpider caveSpider = EntityType.CAVE_SPIDER.create(mob.level());
                         if (caveSpider != null) {
                             mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.ZOMBIE_VILLAGER_CONVERTED, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -126,22 +116,29 @@ public class CommonEvent {
                             mob.level().addFreshEntity(caveSpider);
 
                             caveSpider.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+
+                            mob.setInvisible(true);
+                            return;
                         }
-                        return;
                     }
 
                     if ((mob instanceof Frog || mob instanceof Bat)
-                            && event.getEntity().level().random.nextFloat() < (FailProbability / 3)
-                            || (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && event.getEntity().level().random.nextFloat() < 0.2F)) {
+                            && (event.getEntity().level().random.nextFloat() < (FailProbability / 2)
+                            || (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && event.getEntity().level().random.nextFloat() < 0.3F)
+                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES) && event.getEntity().level().random.nextFloat() < 0.3F))) {
+
                         Witch witch = EntityType.WITCH.create(mob.level());
                         if (witch != null) {
-                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS, 0.5F, 1.0F);
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.WITCH_CELEBRATE, SoundSource.PLAYERS, 1.0F, 1.0F);
                             witch.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
                             mob.level().addFreshEntity(witch);
 
                             witch.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+
+                            mob.setInvisible(true);
+                            return;
                         }
-                        return;
                     }
 
                     if (mob instanceof Allay) {
@@ -152,8 +149,10 @@ public class CommonEvent {
                             mob.level().addFreshEntity(vex);
 
                             vex.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+
+                            mob.setInvisible(true);
+                            return;
                         }
-                        return;
                     }
 
                     if (mob instanceof Villager villager) {
@@ -169,6 +168,8 @@ public class CommonEvent {
                             zombieVillager.setVillagerData(villager.getVillagerData());
                             zombieVillager.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
                             mob.level().addFreshEntity(zombieVillager);
+
+                            mob.setInvisible(true);
                             return;
                         }
                     }
@@ -190,6 +191,8 @@ public class CommonEvent {
                             zombifiedPiglin.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
                             zombifiedPiglin.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
                             mob.level().addFreshEntity(zombifiedPiglin);
+
+                            mob.setInvisible(true);
                             return;
                         }
                     }
@@ -205,28 +208,23 @@ public class CommonEvent {
                             zoglin.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
                             zoglin.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
                             mob.level().addFreshEntity(zoglin);
+
+                            mob.setInvisible(true);
                             return;
                         }
                     }
 
-                    List<Mob> nearbyMobs = mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(15));
+                    List<Mob> nearbyMobs = mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(10));
                     for (Mob nearbyMob : nearbyMobs) {
                         if (nearbyMob.getType() == mob.getType()) {
-                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 0.5F, 1.0F);
                             mob.setInvisible(false);
 
-                            if (mob instanceof NeutralMob || mob instanceof Enemy) {
-                                nearbyMob.setTarget(directSource);
-                            } else if (mob instanceof Animal) {
-                                double deltaX = nearbyMob.getX() - mob.getX();
-                                double deltaZ = nearbyMob.getZ() - mob.getZ();
-                                double distance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
-                                double targetX = nearbyMob.getX() + (15.0 * deltaX / distance);
-                                double targetZ = nearbyMob.getZ() + (15.0 * deltaZ / distance);
-                                nearbyMob.getNavigation().moveTo(targetX, nearbyMob.getY(), targetZ, 2.2);
-                            }
+                            DamageSource damageSource = event.getSource();
+                            nearbyMob.hurt(damageSource, 0.0F);
                         }
                     }
+                    return;
                 }
 
                 // SUCCESSFUL HUNT
@@ -243,7 +241,7 @@ public class CommonEvent {
                         mob.addTag("prevent_drops");
                         mobCopy.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
 
-                        mobCopy.setHealth(1); mobCopy.setInvisible(true);
+                        mobCopy.setHealth(1);
 
                         ItemStack knife = new ItemStack(ModItems.FLINT_KNIFE.get());
                         ItemStack playerItem = directSource.getItemInHand(InteractionHand.MAIN_HAND);
@@ -271,5 +269,15 @@ public class CommonEvent {
         if (event.getEntity() instanceof Mob mob && mob.getTags().contains("prevent_drops")) {
             event.getDrops().clear();
         }
+    }
+
+    private static void transferAttributes(Horse horse, ZombieHorse zombieHorse) {
+        AttributeInstance horseMaxHealth = horse.getAttribute(Attributes.MAX_HEALTH);
+        AttributeInstance zombieHorseMaxHealth = zombieHorse.getAttribute(Attributes.MAX_HEALTH);
+        if (horseMaxHealth != null && zombieHorseMaxHealth != null) {
+            zombieHorseMaxHealth.setBaseValue(horseMaxHealth.getBaseValue());
+        }
+        zombieHorse.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(horse.getAttribute(Attributes.MOVEMENT_SPEED).getBaseValue());
+        zombieHorse.getAttribute(Attributes.JUMP_STRENGTH).setBaseValue(horse.getAttribute(Attributes.JUMP_STRENGTH).getBaseValue());
     }
 }

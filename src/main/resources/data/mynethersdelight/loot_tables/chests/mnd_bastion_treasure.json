@@ -42,7 +42,40 @@
             }
           ],
           "name": "minecraft:book",
-          "weight": 5
+          "weight": 8
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "mynethersdelight:golden_egg"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "name": "mynethersdelight:enchanted_golden_egg"
         },
         {
           "type": "minecraft:empty",

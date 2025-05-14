@@ -3,13 +3,13 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "mynethersdelight:ghast_meats"
+      "tag": "forge:raw_ghast"
     },
     {
       "tag": "forge:vegetables"
     },
     {
-      "tag": "forge:vegetables/carrot"
+      "tag": "forge:crops/carrot"
     },
     {
       "item": "minecraft:bowl"

@@ -34,18 +34,16 @@ public class MNDBlockStates extends BlockStateProvider {
         this.stageBlock(MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
         this.stageBlock(MNDBlocks.WARPED_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
         this.cabinetBlock(MNDBlocks.NETHER_BRICKS_CABINET.get(), "nether_bricks");
+        this.cabinetBlock(MNDBlocks.RED_NETHER_BRICKS_CABINET.get(), "red_nether_bricks");
 
         // POWDERY
         this.crateBlock(MNDBlocks.BULLET_PEPPER_CRATE.get(), "bullet_pepper");
-        this.blockItem(MNDBlocks.BULLET_PEPPER_CRATE);
         this.cabinetBlock(MNDBlocks.POWDERY_CABINET.get(), "powdery");
+        this.simpleBlock(MNDBlocks.POWDERY_PLANKS.get());
         this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_POWDERY_CANNON.get()));
-        this.blockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
 
         this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get()));
-        this.blockItem(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
 
-        this.simpleBlock(MNDBlocks.POWDERY_PLANKS.get());
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_PLANKS_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.slabBlock(((SlabBlock) MNDBlocks.POWDERY_PLANKS_SLAB.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.doorBlockWithRenderType(((DoorBlock) MNDBlocks.POWDERY_DOOR.get()), modLoc("block/powdery_door_bottom"), modLoc("block/powdery_door_top"), "cutout");

@@ -48,8 +48,8 @@ public class ClientSetupEvents {
         BlockEntityRenderers.register(MNDBlockEntityTypes.MND_HSIGN.get(), HangingSignRenderer::new);
         event.enqueueWork(() -> {
             FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
-            pot.addPlant(MNDBlocks.POWDERY_CANNON.getId(), MNDBlocks.POTTED_POWDERY_CANNON::get);
-            pot.addPlant(MNDBlocks.BULLET_PEPPER.getId(), MNDBlocks.POTTED_BULLET_PEPPER::get);
+            pot.addPlant(MNDBlocks.POWDERY_CANNON.get().getLootTable(), MNDBlocks.POTTED_POWDERY_CANNON::get);
+            pot.addPlant(MNDBlocks.BULLET_PEPPER.get().getLootTable(), MNDBlocks.POTTED_BULLET_PEPPER::get);
             Sheets.addWoodType(MNDWoodTypes.POWDERY);
         });
     }

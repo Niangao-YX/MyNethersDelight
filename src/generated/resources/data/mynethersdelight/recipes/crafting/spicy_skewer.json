@@ -3,16 +3,16 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "mynethersdelight:strider_meats"
+      "item": "mynethersdelight:bullet_pepper"
     },
     {
-      "tag": "mynethersdelight:bullet_pepper"
+      "tag": "forge:raw_strider"
     },
     {
       "item": "minecraft:blaze_rod"
     },
     {
-      "tag": "mynethersdelight:bullet_pepper"
+      "item": "mynethersdelight:bullet_pepper"
     }
   ],
   "result": {

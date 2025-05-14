@@ -16,6 +16,7 @@ public class MNDItemsMD {
     public static final RegistryObject<Item> SPICY_NOODLE_SOUP_CUP;
     public static final RegistryObject<Item> SPICY_HOGLIN_STEW_CUP;
     public static final RegistryObject<Item> ROCK_SOUP_CUP;
+    public static final RegistryObject<Item> EGG_SOUP_CUP;
 
     public MNDItemsMD() {
     }
@@ -36,6 +37,9 @@ public class MNDItemsMD {
         );
         ROCK_SOUP_CUP = ITEMS.register("rock_soup_cup", ()  ->
                 new ConsumableItem(CupFoodItem(MNDFoodValues.ROCK_SOUP_CUP), true)
+        );
+        EGG_SOUP_CUP = ITEMS.register("egg_soup_cup", ()  ->
+                new ConsumableItem(CupFoodItem(MNDFoodValues.EGG_SOUP_CUP), true)
         );
     }
 }

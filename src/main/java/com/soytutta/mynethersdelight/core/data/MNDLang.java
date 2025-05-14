@@ -7,6 +7,8 @@ package com.soytutta.mynethersdelight.core.data;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
@@ -18,41 +20,61 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 
 public class MNDLang extends LanguageProvider {
+    private final Set<String> addedKeys = new HashSet<>();
+
     public MNDLang(PackOutput output) {
         super(output, "mynethersdelight", "en_us");
     }
 
+    @Override
     protected void addTranslations() {
-        Set<RegistryObject<Block>> blocks = new HashSet<>(MNDBlocks.BLOCKS.getEntries());
-        Set<RegistryObject<Item>> items = new HashSet<>(MNDItems.ITEMS.getEntries());
-        blocks.remove(MNDBlocks.LETIOS_COMPOST);
-        blocks.remove(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
-        blocks.remove(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
-        blocks.remove(MNDBlocks.WALL_POWDERY_TORCH);
-        blocks.remove(MNDBlocks.POWDERY_WALL_SIGN);
-        blocks.remove(MNDBlocks.POWDERY_WALL_HANGING_SIGN);
-        blocks.remove(MNDBlocks.STRIDERLOAF_BLOCK);
-        blocks.remove(MNDBlocks.COLD_STRIDERLOAF_BLOCK);
-        blocks.remove(MNDBlocks.GHASTA_WITH_CREAM_BLOCK);
+        Set<Supplier<Block>> blocks = MNDBlocks.BLOCKS.getEntries().stream()
+                .map(entry -> (Supplier<Block>) entry::get)
+                .collect(Collectors.toSet());
+        Set<Supplier<Item>> items = MNDItems.ITEMS.getEntries().stream()
+                .map(entry -> (Supplier<Item>) entry::get)
+                .collect(Collectors.toSet());
+
+        blocks.removeIf(block -> Set.of(
+                MNDBlocks.LETIOS_COMPOST.get(),
+                MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(),
+                MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),
+                MNDBlocks.WALL_POWDERY_TORCH.get(),
+                MNDBlocks.POWDERY_WALL_SIGN.get(),
+                MNDBlocks.POWDERY_WALL_HANGING_SIGN.get()
+        ).contains(block.get()));
+
         blocks.forEach((b) -> {
-            String name = (b.get()).getDescriptionId().replaceFirst("block.mynethersdelight.", "");
-            name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
-            this.add((b.get()).getDescriptionId(), name);
+            String descriptionId = b.get().getDescriptionId();
+            if (addedKeys.add(descriptionId)) {
+                String name = descriptionId.replaceFirst("block.mynethersdelight.", "");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll(" Block", "");
+                this.add(descriptionId, name);
+            }
         });
+
         items.removeIf((i) -> i.get() instanceof BlockItem);
         items.forEach((i) -> {
-            String name = (i.get()).getDescriptionId().replaceFirst("item.mynethersdelight.", "");
-            name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
-            name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("And", "and");
-            name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("With", "with");
-            this.add(i.get().getDescriptionId(), name);
+            String descriptionId = i.get().getDescriptionId();
+            if (addedKeys.add(descriptionId)) {
+                String name = descriptionId.replaceFirst("item.mynethersdelight.", "");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("A", "a");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("On", "on");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("And", "and");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("With", "with");
+                this.add(descriptionId, name);
+            }
         });
+
+        addCustomTranslations();
+    }
+
+    private void addCustomTranslations() {
         this.add("block.mynethersdelight.letios_compost", "Leteos Compost");
         this.add("block.mynethersdelight.powdery_block", "Block of Powdery Cannon");
         this.add("block.mynethersdelight.stripped_powdery_block", "Block of Stripped Powdery Cannon");
-        this.add("block.mynethersdelight.striderloaf_block", "Striderloaf");
-        this.add("block.mynethersdelight.cold_striderloaf_block", "Cold Striderloaf");
-        this.add("block.mynethersdelight.ghasta_with_cream_block", "Ghasta with Cream");
 
         this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
         this.add("effect.mynethersdelight.g_pungent", "Pungent");
@@ -64,8 +86,11 @@ public class MNDLang extends LanguageProvider {
         this.add("mynethersdelight.jei.forgoting.accelerators", "Sped up by adjacent activators (see below)");
         this.add("mynethersdelight.jei.forgoting.light", "Sped up by adjacent flames (see below)");
         this.add("mynethersdelight.jei.forgoting.fluid", "Sped up by adjacent lava");
+        this.add("mynethersdelight.block.feast.space_required", "You need more space to serve this.");
         this.add("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
         this.add("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
+        this.add("farmersdelight.tooltip.golden_egg", "Nourished by all harmful effects");
+        this.add("farmersdelight.tooltip.enchanted_golden_egg", "Nourished by all harmful effects");
         this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
         this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
         this.add("farmersdelight.tooltip.magma_cake_slice", "Spicy frog Snack");
@@ -84,13 +109,16 @@ public class MNDLang extends LanguageProvider {
         this.add("enchantment.mynethersdelight.poaching", "Poaching");
         this.add("enchantment.mynethersdelight.poaching.desc", "Responsible hunting can provide you with extra ingredients!!!\nBut be careful about choosing your target...");
 
-        /// Miners Delight Cups
+        this.add("item.mynethersdelight.bullet_pepper", "Bullet Pepper");
+
         this.add("item.miners_delight.strider_stew_cup", "Strider Stew Cup");
         this.add("item.miners_delight.spicy_noodle_soup_cup", "Spicy Noodle Soup");
         this.add("item.miners_delight.spicy_hoglin_stew_cup", "Spicy Hoglin Stew Cup");
         this.add("item.miners_delight.rock_soup_cup", "Rock Soup Cup");
+        this.add("item.miners_delight.egg_soup_cup", "Egg Soup Cup");
     }
 
+    @Override
     public String getName() {
         return "Lang Entries";
     }
@@ -101,7 +129,7 @@ public class MNDLang extends LanguageProvider {
         String[] var4 = stringArray;
         int var5 = stringArray.length;
 
-        for(int var6 = 0; var6 < var5; ++var6) {
+        for (int var6 = 0; var6 < var5; ++var6) {
             String string = var4[var6];
             stringBuilder.append(Character.toUpperCase(string.charAt(0))).append(string.substring(1)).append(regex);
         }

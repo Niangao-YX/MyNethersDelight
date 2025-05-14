@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import com.soytutta.mynethersdelight.common.tag.CompatibilityTags;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
+import com.soytutta.mynethersdelight.common.tag.MyCommonTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -30,10 +31,24 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     protected void addTags(HolderLookup.Provider provider) {
+        this.registerCommonTags();
         this.registerModTags();
         this.registerForgeTags();
         this.registerMinecraftTags();
         this.registerCompatibilityTags();
+    }
+
+    private void registerCommonTags() {
+        this.tag(MyCommonTags.FOODS_GIANT_TENTACLES).add(MNDItems.GHASTA.get());
+        this.tag(MyCommonTags.FOODS_MAGMA_CUBE).add(MNDItems.MAGMA_CAKE.get(), MNDItems.MAGMA_CAKE_SLICE.get(), MNDItems.ROCK_SOUP.get(), MNDItems.BURNT_ROLL.get());
+        this.tag(MyCommonTags.FOODS_RAW_STRIDER).addTag(MNDTags.STRIDER_SLICE).addTag(MNDTags.MINCED_STRIDER);
+        this.tag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MNDTags.RAW_HOGLIN);
+        this.tag(MyCommonTags.FOODS_COOKED_HOGLIN).addTag(MNDTags.COOKED_HOGLIN);
+        this.tag(MyCommonTags.FOODS_RAW_SAUSAGE).add(MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(MyCommonTags.FOODS_COOKED_SAUSAGE).add(MNDItems.ROASTED_SAUSAGE.get());
+        this.tag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.BOILED_EGG.get());
+        this.tag(MyCommonTags.FOODS_RAW_GHAST).add(MNDItems.GHASTA.get(), MNDItems.GHASMATI.get());
+        this.tag(MyCommonTags.FOODS_RICE_PASTA).add(MNDItems.GHASTA.get());
     }
 
     private void registerModTags() {
@@ -62,7 +77,7 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerForgeTags() {
-        this.tag(ForgeTags.COOKED_EGGS).add(MNDItems.BOILED_EGG.get());
+        this.tag(ForgeTags.COOKED_EGGS).addTag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());;
         this.tag(ForgeTags.EGGS).add(MNDItems.STRIDER_EGG.get());
         this.tag(ForgeTags.PASTA_RAW_PASTA).add(MNDItems.GHASTA.get());
         this.tag(ForgeTags.PASTA).add(MNDItems.GHASTA.get());
@@ -70,7 +85,9 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ForgeTags.CROPS_RICE).add(MNDItems.GHASMATI.get());
         this.tag(ForgeTags.GRAIN_RICE).add(MNDItems.GHASMATI.get());
         this.tag(ForgeTags.RAW_FISHES).add(MNDItems.STRIDER_SLICE.get());
-        this.tag(ForgeTags.RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(ForgeTags.RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get()).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
+        this.tag(ForgeTags.COOKED_PORK).addTag(MyCommonTags.FOODS_COOKED_HOGLIN);
+        this.tag(ForgeTags.BREAD).add(MNDItems.SLICES_OF_BREAD.get(), MNDItems.TOASTS.get());
     }
 
     private void registerMinecraftTags() {
